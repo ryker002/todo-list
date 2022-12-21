@@ -1,13 +1,7 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useDebugValue,
-  useReducer,
-} from "react";
 import { useListState } from "@mantine/hooks";
-import db, { Data, Todo } from "../util/low";
 import _ from "lodash";
+import { createContext, ReactNode, useContext } from "react";
+import db, { Todo } from "../util/low";
 
 export const TodoStoreContext = createContext<Todo[]>([]);
 

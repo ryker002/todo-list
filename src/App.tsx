@@ -32,6 +32,7 @@ function App() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -46,6 +47,7 @@ function App() {
     };
 
     dispatch(newTodo, { type: "add" });
+    reset();
   }
 
   function reorder(value: TodoType[]) {
