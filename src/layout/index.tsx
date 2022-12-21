@@ -1,22 +1,21 @@
-import { Box, Button, Container, Flex, IconButton } from "@chakra-ui/react";
-import { ReactNode } from "react";
 import {
+  Box,
+  Button,
+  Container,
+  Flex,
   Menu,
   MenuButton,
-  MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
+  MenuList,
 } from "@chakra-ui/react";
 import { IconChevronDown } from "@tabler/icons";
-import db from "../util/low";
+import { ReactNode } from "react";
 import { useTodoStore } from "../hooks/useTodoStore";
+import db from "../util/low";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const todos = db.chain.get("todos").value();
-  const { values, dispatch, handlers } = useTodoStore();
+  const { dispatch } = useTodoStore();
 
   function clearCompleted() {
     try {
@@ -26,6 +25,15 @@ export default function Layout({ children }: { children: ReactNode }) {
       else console.log("No Completed Todo's to Remove");
     } catch {
       console.log("No Completed Todo's to Remove");
+    }
+  }
+  function clearAll() {
+    try {
+      if (todos.length >= 1)
+        todos.forEach((todo) => dispatch(todo.id, { type: "remove" }));
+      else console.log("No Todo's to Clear");
+    } catch {
+      throw Error("Can't Delete Todos");
     }
   }
 
@@ -39,8 +47,8 @@ export default function Layout({ children }: { children: ReactNode }) {
                 Actions
               </MenuButton>
               <MenuList>
-                <MenuItem>Download a Copy</MenuItem>
                 <MenuItem onClick={clearCompleted}>Clear Completed</MenuItem>
+                <MenuItem onClick={clearAll}>Clear All</MenuItem>
               </MenuList>
             </Menu>
           </Flex>

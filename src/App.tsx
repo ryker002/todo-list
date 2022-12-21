@@ -7,9 +7,8 @@ import {
   FormLabel,
   Heading,
   Input,
-  VStack,
 } from "@chakra-ui/react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, Reorder } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
@@ -17,7 +16,6 @@ import { useTodoStore } from "./hooks/useTodoStore";
 import Layout from "./layout";
 import TodoSkeleton from "./skeleton";
 import db, { Todo as TodoType } from "./util/low";
-import { Reorder } from "framer-motion";
 
 const Todo = lazy(() => import("./todo"));
 
